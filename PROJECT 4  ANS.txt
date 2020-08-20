@@ -1,0 +1,68 @@
+var thief = createSprite(24,365,15,15);
+thief.shapeColor="black";
+var laser1 = createSprite(100,96,200,5);
+laser1.shapeColor="red";
+laser1.velocityX=10;
+var laser2 = createSprite(100,336,200,5);
+laser2.shapeColor="red";
+laser2.velocityX=10;
+var laser3 = createSprite(96,52,5,200);
+laser3.shapeColor="red";
+laser3.velocityY=10;
+var laser4 = createSprite(288,89,5, 200);
+laser4.shapeColor="red";
+laser4.velocityY=10;
+function draw(){    
+    background("yellow ");
+     createEdgeSprites();
+     
+    shape(390,0,380,10,390,20,400,10);
+     
+    
+     laser1.bounceOff(edges);
+     laser2.bounceOff(edges);
+     laser3.bounceOff(edges);
+     laser4.bounceOff(edges);
+     thief.bounceOff(edges);
+     
+  if (keyWentDown("DOWN_ARROW")) {
+     thief.velocityX=0;
+     thief.velocityY=5;
+    }
+
+   if (keyWentDown("UP_ARROW")) {
+     thief.velocityX=0;
+     thief.velocityY=-5;
+    }
+  
+  if (keyWentDown("RIGHT_ARROW")) {
+     thief.velocityX=5;
+     thief.velocityY=0;
+    }
+
+   if (keyWentDown("LEFT_ARROW")) {
+     thief.velocityX=-5;
+     thief.velocityY=0;
+    }
+    
+  if (laser1.isTouching(thief)||laser2.isTouching(thief)) {
+      laser1.velocityX=0;
+      laser2.velocityX=0;
+      laser3.velocityY=0;
+      laser4.velocityY=0;
+      thief.velocityX=0;
+      thief.velocityY=0;
+      textSize(24);
+      text("THEIF CAUGHT BY LASER",80,200);
+      text("PRESS SPACE TO CONTINUE",8,308);
+    }
+  if (keyDown("space")){
+    thief.x=24;
+    thief.y=365;
+    laser1.velocityX=10;
+    laser2.velocityX=10;
+    laser3.velocityY=10;
+    laser4.velocityY=10;
+  }
+    drawSprites();
+}
